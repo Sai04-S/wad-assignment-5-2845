@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products App</title>
+    <style>
+        table, th, td{
+            border:1px solid black;
+            border-collapse: collapse;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Product List</h2>
+
+<select id="filterCategory">
+    <option value="All">All</option>
+    <option value="Electronics">Electronics</option>
+    <option value="Fashion">Fashion</option>
+</select>
+
+<button onclick="filterProducts()">Filter</button>
+
+<table id="productTable">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Rating</th>
+    </tr>
+</table>
+
+<h3 id="avgRating"></h3>
+
+<h2>Add New Product</h2>
+
+<input type="text" id="name" placeholder="Product Name">
+<input type="number" id="price" placeholder="Price">
+<input type="text" id="category" placeholder="Category">
+<input type="number" step="0.1" id="rating" placeholder="Rating">
+
+<button onclick="addProduct()">Add Product</button>
+
+<script>
+let products = [];
+
+fetch('products.json')
+.then(response => response.json())
+.then(data => {
+    products = data;
+    displayProducts(products);
+});
+
+function displayProducts(productArray){
+    let table = document.getElementById("productTable");
+
+    table.innerHTML = `
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Rating</th>
+        </tr>
+    `;
+
+    let totalRating = 0;
+
+    productArray.forEach(product => {
+        totalRating += product.rating;
+
+        table.innerHTML += `
+        <tr>
+            <td>${product.product_id}</td>
+            <td>${product.product_name}</td>
+            <td>${product.price}</td>
+            <td>${product.category}</td>
+            <td>${product.rating}</td>
+        </tr>
+        `;
+    });
+
+    document.getElementById("avgRating").innerText =
+        "Average Rating: " + (totalRating/productArray.length).toFixed(2);
+}
+
+function filterProducts(){
+    let category = document.getElementById("filterCategory").value;
+
+    if(category === "All"){
+        displayProducts(products);
+    } else {
+        let filtered = products.filter(p => p.category === category);
+        displayProducts(filtered);
+    }
+}
+
+function addProduct(){
+    let newProduct = {
+        product_id: products.length + 1,
+        product_name: document.getElementById("name").value,
+        price: parseFloat(document.getElementById("price").value),
+        category: document.getElementById("category").value,
+        rating: parseFloat(document.getElementById("rating").value)
+    };
+
+    products.push(newProduct);
+
+    displayProducts(products);
+}
+</script>
+
+</body>
+</html>
