@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Course Analytics</title>
+</head>
+<body>
+
+<h2>Academic Risk Students</h2>
+<ul id="riskList"></ul>
+
+<h3 id="avgMarks"></h3>
+<h3 id="avgAssignment"></h3>
+
+<script>
+fetch('courseAnalytics.json')
+.then(response => response.json())
+.then(data => {
+
+    let riskList = document.getElementById("riskList");
+
+    let totalMarks = 0;
+    let totalAssignments = 0;
+    let assignmentCount = 0;
+
+    data.students.forEach(student => {
+
+        let riskReason = "";
+
+        if(student.attendance_percentage < 75){
+            riskReason += "Low Attendance ";
+        }
+
+        if(student.internal_marks < 40){
+            riskReason += "Low Internal Marks";
+        }
+
+        if(riskReason !== ""){
+            let li = document.createElement("li");
+            li.innerText = `${student.name} - ${riskReason}`;
+            riskList.appendChild(li);
+        }
+
+        totalMarks += student.internal_marks;
+
+        student.assignment_scores.forEach(score => {
+            totalAssignments += score;
+            assignmentCount++;
+        });
+
+    });
+
+    let avgMarks = totalMarks / data.students.length;
+    let avgAssignments = totalAssignments / assignmentCount;
+
+    document.getElementById("avgMarks").innerText =
+        "Average Internal Marks: " + avgMarks.toFixed(2);
+
+    document.getElementById("avgAssignment").innerText =
+        "Average Assignment Score: " + avgAssignments.toFixed(2);
+
+});
+</script>
+
+</body>
+</html>
