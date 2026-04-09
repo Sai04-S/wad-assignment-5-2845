@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students CGPA Filter</title>
+</head>
+<body>
+
+<h2>Students with CGPA Greater than 8.0</h2>
+<ul id="studentList"></ul>
+
+<script>
+fetch('students.json')
+.then(response => response.json())
+.then(data => {
+    let list = document.getElementById("studentList");
+
+    data.forEach(student => {
+        if(student.cgpa > 8.0){
+            let li = document.createElement("li");
+            li.innerHTML = `
+                ${student.name} - ${student.department} - CGPA: ${student.cgpa}
+            `;
+            list.appendChild(li);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
