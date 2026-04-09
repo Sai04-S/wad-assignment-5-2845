@@ -1,0 +1,42 @@
+[
+  {
+    "student_id": 101,
+    "name": "Rahul",
+    "department": "CSE",
+    "cgpa": 8.7,
+    "isHosteller": true,
+    "skills": ["Java", "Python", "HTML"]
+  },
+  {
+    "student_id": 102,
+    "name": "Priya",
+    "department": "ECE",
+    "cgpa": 7.9,
+    "isHosteller": false,
+    "skills": ["C", "Embedded"]
+  },
+  {
+    "student_id": 103,
+    "name": "Arjun",
+    "department": "IT",
+    "cgpa": 9.1,
+    "isHosteller": true,
+    "skills": ["JavaScript", "React"]
+  },
+  {
+    "student_id": 104,
+    "name": "Sneha",
+    "department": "CSE",
+    "cgpa": 8.4,
+    "isHosteller": false,
+    "skills": ["Python", "ML"]
+  },
+  {
+    "student_id": 105,
+    "name": "Kiran",
+    "department": "MECH",
+    "cgpa": 7.5,
+    "isHosteller": true,
+    "skills": ["AutoCAD"]
+  }
+]
