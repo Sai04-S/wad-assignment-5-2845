@@ -1,0 +1,28 @@
+{
+  "course_id": "CS301",
+  "course_name": "Web Development",
+  "instructor": "Dr. Sharma",
+  "students": [
+    {
+      "student_id": 101,
+      "name": "Rahul",
+      "attendance_percentage": 80,
+      "internal_marks": 45,
+      "assignment_scores": [80, 90, 85]
+    },
+    {
+      "student_id": 102,
+      "name": "Priya",
+      "attendance_percentage": 65,
+      "internal_marks": 50,
+      "assignment_scores": [70, 75, 72]
+    },
+    {
+      "student_id": 103,
+      "name": "Arjun",
+      "attendance_percentage": 90,
+      "internal_marks": 35,
+      "assignment_scores": [88, 92, 85]
+    }
+  ]
+}
